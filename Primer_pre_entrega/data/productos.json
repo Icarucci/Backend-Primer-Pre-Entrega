@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "titulo": "Camiseta Deportiva",
+    "descripcion": "Camiseta de manga corta",
+    "codigo": "CAMISSET09",
+    "precio": 30000,
+    "stock": 200,
+    "categoria": "Ropa deportiva",
+    "imagen": [
+      "https://www.boca1905.com/wp-content/uploads/2024/04/Camiseta-Retro-1981-1-510x510.jpg"
+    ],
+    "status": true
+  },
+  {
+    "id": 2,
+    "titulo": "Pantalon Deportivo",
+    "descripcion": "Pantalon Corto",
+    "codigo": "PANTALONN09",
+    "precio": 15000,
+    "stock": 200,
+    "categoria": "Ropa deportiva",
+    "imagen": [
+      "https://www.boca1905.com/wp-content/uploads/2022/12/Short_1981_01_A-510x510.jpg"
+    ],
+    "status": true
+  }
+]
