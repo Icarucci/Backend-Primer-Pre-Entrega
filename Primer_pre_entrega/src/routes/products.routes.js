@@ -25,7 +25,7 @@ router.get('/:pid' , async (req, res) => {
         if(!product) {
             return res.status(404).send('Producto no encontrado');
         }
-        res.json(products)
+        res.json(product)
     } catch (error) {
         console.log(error);
     }
