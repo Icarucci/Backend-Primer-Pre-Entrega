@@ -3,6 +3,9 @@ import productsRouter from './routes/products.routes.js';
 import { cartsRouter } from './routes/carts.routes.js';
 import { Server } from 'socket.io';
 import { create } from 'express-handlebars';
+import path from 'path';
+import { __dirname } from './path.js';
+import viewRouter from './routes/view.routes.js';
 
 const app = express();
 const hbs = create();
@@ -20,7 +23,7 @@ app.get('ping' , (req, res) => {
 })
 app.use('/api/products' , productsRouter);
 app.use('/api/cart' , cartsRouter);
-
+app.use('/products' , viewRouter)
 
 
 const SERVER_PORT = 8080;
