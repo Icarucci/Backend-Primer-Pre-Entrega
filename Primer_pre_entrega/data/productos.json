@@ -24,5 +24,15 @@
       "https://www.boca1905.com/wp-content/uploads/2022/12/Short_1981_01_A-510x510.jpg"
     ],
     "status": true
+  },
+  {
+    "titulo": "5",
+    "descripcion": "5",
+    "codigo": "5",
+    "categoria": "5",
+    "precio": 5,
+    "stock": 5,
+    "imagen": "5",
+    "status": true
   }
 ]

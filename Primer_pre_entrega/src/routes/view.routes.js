@@ -10,7 +10,7 @@ const productManager = new ProductManager()
 
 // Aca van todas las APIS
 //Listar
-viewRouter.get('/' , async (req, res) => {
+viewRouter.get('/products' , async (req, res) => {
     try {
         const limit = req.query.limit ? parseInt(req.query.limit) : undefined
         const products = await productManager.getAllProducts(limit)
@@ -33,6 +33,17 @@ viewRouter.get('/:pid' , async (req, res) => {
         console.log(error);
     }
 })
+
+//Obtener RealTimeProducts
+viewRouter.get('/', async (req, res) => {
+    try {
+        const products = await productManager.getAllProducts();
+        res.status(200).render('templates/realTimeProducts', { products , js:'realTime.js' } );
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error al obtener el RealTimeProducts');
+    }
+});
 
 
 export default viewRouter;

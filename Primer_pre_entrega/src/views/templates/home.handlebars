@@ -1,23 +1,27 @@
 <h2>Listado de productos</h2>
-<div>
-  {{#each products}}
-  {{#if status}}
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{imagen}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{titulo}}</h5>
-      <p class="card-text">{{descripcion}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Código: {{codigo}}</li>
-      <li class="list-group-item">Categoria: {{categoria}}</li>
-      <li class="list-group-item">Precio: {{precio}} </li>
-      <li class="list-group-item">Stock: {{stock}}</li>
-    </ul>
-    <a href="#" class="text-decoration-none">
-      <button class="btn btn-primary w-100 py-2 mt-2 hover-shadow-lg">Agregar al carrito</button>
-    </a>
+<div class="container">
+  <div class="row">
+    {{#each products}}
+      {{#if status}}
+        <div class="col-md-4 mb-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{imagen}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{titulo}}</h5>
+              <p class="card-text">{{descripcion}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Código: {{codigo}}</li>
+              <li class="list-group-item">Categoria: {{categoria}}</li>
+              <li class="list-group-item">Precio: {{precio}} </li>
+              <li class="list-group-item">Stock: {{stock}}</li>
+            </ul>
+            <a href="#" class="text-decoration-none">
+              <button class="btn btn-primary w-100 py-2 mt-2 hover-shadow-lg">Agregar al carrito</button>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+    {{/each}}
   </div>
-  {{/if}}
-  {{/each}}
 </div>

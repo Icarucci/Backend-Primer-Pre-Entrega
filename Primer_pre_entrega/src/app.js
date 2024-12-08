@@ -6,6 +6,8 @@ import { create } from 'express-handlebars';
 import path from 'path';
 import { __dirname } from './path.js';
 import viewRouter from './routes/view.routes.js';
+import fs from 'fs/promises';
+
 
 const app = express();
 const hbs = create();
@@ -17,13 +19,16 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '/views'));
 
+
 //Routers
 app.get('ping' , (req, res) => {
     res.send('pong');
 })
 app.use('/api/products' , productsRouter);
 app.use('/api/cart' , cartsRouter);
-app.use('/products' , viewRouter)
+app.use('/home' , viewRouter)
+app.use('/realTimeProducts' , viewRouter);
+app.use('/public', express.static(__dirname + '/public'));
 
 
 const SERVER_PORT = 8080;
@@ -40,8 +45,12 @@ const io = new Server (server);
 //Websocket
 let messages = [];
 
+
 io.on('connection', (socket) => {
-    console.log('Un usuario se ha conectado', socked.id);
+
+
+
+    console.log('Un usuario se ha conectado', socket.id);
 
     socket.on('mensaje', (data) => {
         console-console.log("Mensaje recibido; ", data);
@@ -51,4 +60,26 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('Un usuario se ha desconectado', socket.id);
     });
+
+    socket.on('borrarproducto', async (id) => {
+        const productosFilePath = path.resolve('data', 'productos.json');
+        const data = await fs.readFile(productosFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        console.log(products);
+        const productosActualizados = products.filter(producto => producto.id !== parseInt(id.id));
+        console.log(productosActualizados);
+    })
+
+    socket.on('agregarProducto', async (nuevoProducto) => {
+        const productosFilePath = path.resolve('data', 'productos.json');
+        const data = await fs.readFile(productosFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        console.log(products);
+        products.push(nuevoProducto);
+        console.log(products);
+        await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
+    });
 });
+
+
+
