@@ -35,5 +35,16 @@
     "imagen": "10",
     "status": true,
     "id": 3
+  },
+  {
+    "titulo": "Medias de Boca Juniors",
+    "descripcion": "Medias de indumentaria principal",
+    "codigo": "MEDIASS09",
+    "categoria": "Ropa deportiva",
+    "precio": 5000,
+    "stock": 10,
+    "imagen": "https://essential.vtexassets.com/arquivos/ids/1521670-800-auto?v=638645939388800000&width=800&height=auto&aspect=true",
+    "status": true,
+    "id": 4
   }
 ]

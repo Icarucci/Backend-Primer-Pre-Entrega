@@ -67,6 +67,8 @@ io.on('connection', (socket) => {
         const products = JSON.parse(data);
         console.log(products);
         const productosActualizados = products.filter(producto => producto.id !== parseInt(id.id));
+        await fs.writeFile(productosFilePath, JSON.stringify(productosActualizados, null, 2));
+        socket.emit('productoEliminado', id.id);
         console.log(productosActualizados);
     })
 
@@ -91,7 +93,9 @@ io.on('connection', (socket) => {
         products.push(productoConId);
         await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
     
+        socket.emit('productoAgregado', productoConId);
         console.log('Nuevo producto agregado:', productoConId);
+        
     });
 });
 
