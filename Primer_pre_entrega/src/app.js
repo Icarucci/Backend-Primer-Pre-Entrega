@@ -48,8 +48,6 @@ let messages = [];
 
 io.on('connection', (socket) => {
 
-
-
     console.log('Un usuario se ha conectado', socket.id);
 
     socket.on('mensaje', (data) => {
@@ -61,13 +59,14 @@ io.on('connection', (socket) => {
         console.log('Un usuario se ha desconectado', socket.id);
     });
 
+
     socket.on('borrarproducto', async (id) => {
         const productosFilePath = path.resolve('data', 'productos.json');
         const data = await fs.readFile(productosFilePath, 'utf-8');
         const products = JSON.parse(data);
         const productosActualizados = products.filter(producto => producto.id !== parseInt(id.id));
         await fs.writeFile(productosFilePath, JSON.stringify(productosActualizados, null, 2));
-        socket.emit('productoEliminado', id.id);
+        socket.emit('productoEliminado', data.id);
         console.log('Se eliminó el producton con la id:', id.id);
         console.log(productosActualizados);
     })
