@@ -24,27 +24,5 @@
       "https://www.boca1905.com/wp-content/uploads/2022/12/Short_1981_01_A-510x510.jpg"
     ],
     "status": true
-  },
-  {
-    "titulo": "Camiseta de River",
-    "descripcion": "Camiseta Blanca y Roja",
-    "codigo": "COD1002",
-    "categoria": "Camiseta",
-    "precio": 1000,
-    "stock": 10,
-    "imagen": "10",
-    "status": true,
-    "id": 3
-  },
-  {
-    "titulo": "Medias de Boca Juniors",
-    "descripcion": "Medias de indumentaria principal",
-    "codigo": "MEDIASS09",
-    "categoria": "Ropa deportiva",
-    "precio": 5000,
-    "stock": 10,
-    "imagen": "https://essential.vtexassets.com/arquivos/ids/1521670-800-auto?v=638645939388800000&width=800&height=auto&aspect=true",
-    "status": true,
-    "id": 4
   }
 ]

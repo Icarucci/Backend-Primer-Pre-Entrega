@@ -68,7 +68,8 @@ io.on('connection', (socket) => {
         console.log(products);
         const productosActualizados = products.filter(producto => producto.id !== parseInt(id.id));
         await fs.writeFile(productosFilePath, JSON.stringify(productosActualizados, null, 2));
-        socket.emit('productoEliminado', id.id);
+        socket.emit('productoEliminado', data.id);
+        console.log('Producto eliminado', data.id);
         console.log(productosActualizados);
     })
 

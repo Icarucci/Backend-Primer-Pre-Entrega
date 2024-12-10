@@ -23,7 +23,7 @@ formAgregar.addEventListener('submit', (e) => {
 
 //Para visualizar el nuevo producto agregado en el FrontEnd
 socket.on('productoAgregado', (nuevoProducto) => {
-  const contenedor = document.querySelector('.row');
+  const contenedor = document.querySelector('.contenedorDeProductos');
   const productoCard = `
       <div class="col-md-4 mb-4" data-id="${nuevoProducto.id}">
           <div class="card" style="width: 18rem;">
@@ -44,27 +44,28 @@ socket.on('productoAgregado', (nuevoProducto) => {
   `;
   contenedor.innerHTML += productoCard;
 
-  //Asigno el evento de eliminación al botón de eliminar
-  const newBtnBorrar = document.querySelector(`.btnBorrar[data-id="${nuevoProducto.id}"]`);
-  newBtnBorrar.addEventListener('click', (event) => {
+  //Delegación de eventos para la eliminación de productos
+document.querySelector('.contenedorDeProductos').addEventListener('click', (event) => {
+  if (event.target && event.target.classList.contains('btnBorrar')) {
     const productoId = event.target.getAttribute('data-id');
+    console.log('Producto a eliminar:', productoId);
+
     socket.emit('borrarproducto', { id: productoId });
 
-    //Eliminamos el producto del DOM
-    const cardToRemove = event.target.closest('.col-md-4');
+    // Eliminar el producto del DOM directamente utilizando el data-id
+    const cardToRemove = document.querySelector(`[data-id="${productoId}"]`);
     if (cardToRemove) {
       cardToRemove.remove();
     }
-  });
+  }
 });
 
-//Escuchamos el evento de eliminación de un producto desde el servidor
+// Escuchar el evento de eliminación desde el servidor
 socket.on('productoEliminado', (productoId) => {
   const productoCard = document.querySelector(`[data-id="${productoId}"]`);
   if (productoCard) {
-    const cardBorrar = productoCard.closest('.col-md-4');
-    if (cardBorrar) {
-      cardBorrar.remove();
-    }
+    productoCard.remove();  // Directamente eliminamos el contenedor del producto
   }
+});
+
 });
