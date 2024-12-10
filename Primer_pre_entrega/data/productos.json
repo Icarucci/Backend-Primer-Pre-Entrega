@@ -26,13 +26,14 @@
     "status": true
   },
   {
-    "titulo": "5",
-    "descripcion": "5",
-    "codigo": "5",
-    "categoria": "5",
-    "precio": 5,
-    "stock": 5,
-    "imagen": "5",
-    "status": true
+    "titulo": "Camiseta de River",
+    "descripcion": "Camiseta Blanca y Roja",
+    "codigo": "COD1002",
+    "categoria": "Camiseta",
+    "precio": 1000,
+    "stock": 10,
+    "imagen": "10",
+    "status": true,
+    "id": 3
   }
 ]

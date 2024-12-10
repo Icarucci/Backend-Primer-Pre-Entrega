@@ -74,10 +74,24 @@ io.on('connection', (socket) => {
         const productosFilePath = path.resolve('data', 'productos.json');
         const data = await fs.readFile(productosFilePath, 'utf-8');
         const products = JSON.parse(data);
-        console.log(products);
-        products.push(nuevoProducto);
-        console.log(products);
+    
+        let newId = 1;
+        
+        // Si hay productos en el archivo, se calcula la nueva ID
+        if (products.length > 0) {
+            
+            let lastProductId = products[products.length - 1].id;
+            newId = lastProductId + 1;
+    
+            while (products.some(product => product.id === newId)) {
+                newId++;
+            }
+        }
+        const productoConId = { ...nuevoProducto, id: newId };
+        products.push(productoConId);
         await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
+    
+        console.log('Nuevo producto agregado:', productoConId);
     });
 });
 

@@ -21,6 +21,7 @@ btnBorrar.forEach(button => {
             datosProducto[key] = value;
           }
     });
+
     datosProducto["status"] = true;
     socket.emit('agregarProducto', datosProducto);
     console.log(datosProducto);
