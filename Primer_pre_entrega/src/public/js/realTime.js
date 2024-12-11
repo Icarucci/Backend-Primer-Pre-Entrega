@@ -68,3 +68,33 @@ socket.on('productoEliminado', (productoId) => {
     productoCard.remove();  // Directamente eliminamos el contenedor del producto
   }
 });
+
+//Escuchar los productos cuando la página se refresca
+socket.on('productosIniciales', (productos) => {
+  const contenedor = document.querySelector('.contenedorDeProductos');
+  contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar los productos
+
+  productos.forEach((producto) => {
+    if (producto.status) {
+      const productoCard = `
+        <div class="col-md-4 mb-4" data-id="${producto.id}">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="${producto.imagen}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">${producto.titulo}</h5>
+              <p class="card-text">${producto.descripcion}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Código: ${producto.codigo}</li>
+              <li class="list-group-item">Categoria: ${producto.categoria}</li>
+              <li class="list-group-item">Precio: ${producto.precio}</li>
+              <li class="list-group-item">Stock: ${producto.stock}</li>
+            </ul>
+            <button class="btn btn-danger w-100 py-2 mt-2 hover-shadow-lg btnBorrar" data-id="${producto.id}">Eliminar</button>
+          </div>
+        </div>
+      `;
+      contenedor.innerHTML += productoCard;
+    }
+  });
+});

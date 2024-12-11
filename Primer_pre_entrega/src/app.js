@@ -46,12 +46,27 @@ const io = new Server (server);
 let messages = [];
 
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 
     console.log('Un usuario se ha conectado', socket.id);
 
+    //Cargar productos desde el archivo JSON a penas inicio el servidor
+    // Función para cargar productos desde el archivo JSON
+const loadProducts = async () => {
+    const productosFilePath = path.resolve('data', 'productos.json');
+    try {
+        const data = await fs.readFile(productosFilePath, 'utf-8');
+        return JSON.parse(data); // Devuelve los productos cargados desde el archivo
+    } catch (error) {
+        console.error("Error al leer productos:", error);
+        return []; // Si hay error, devolver un arreglo vacío
+    }
+};
+        const products = await loadProducts();
+        socket.emit('productosIniciales', products);
+
     socket.on('mensaje', (data) => {
-        console-console.log("Mensaje recibido; ", data);
+        console.log("Mensaje recibido; ", data);
         messages.push(data);
         socket.emit('Respuesta', message);
     });
