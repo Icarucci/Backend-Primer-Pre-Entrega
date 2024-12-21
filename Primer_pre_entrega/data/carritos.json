@@ -7,5 +7,14 @@
         "cantidad": 5
       }
     ]
+  },
+  {
+    "id": "9df852f058",
+    "products": [
+      {
+        "productId": 2,
+        "cantidad": 3
+      }
+    ]
   }
 ]

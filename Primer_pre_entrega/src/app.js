@@ -7,6 +7,7 @@ import path from 'path';
 import { __dirname } from './path.js';
 import viewRouter from './routes/view.routes.js';
 import fs from 'fs/promises';
+import { mongoose } from 'mongoose';
 
 
 const app = express();
@@ -39,6 +40,12 @@ const SERVER_PORT = 8080;
 const server = app.listen(SERVER_PORT,() => {
     console.log(`Servidor corriendo en puerto: ${SERVER_PORT}`);
 });
+
+await mongoose.connect("mongodb+srv://icarucci:Penacho1793@cluster0.zp36h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.then(() => {
+    console.log("Conexion exitosa a Database")})
+    .catch(() => 
+        {console.log("Error al conectarse a Database")})
 
 const io = new Server (server);
 
