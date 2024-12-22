@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import ProductManager from '../services/ProductManager.js';
+import { viewProducts } from '../controllers/products.controller.js';
+import { viewCart } from '../controllers/cart.controller.js';
 
 
 //Preparar el router para las rutas
@@ -10,29 +12,13 @@ const productManager = new ProductManager()
 
 // Aca van todas las APIS
 //Listar
-viewRouter.get('/products' , async (req, res) => {
-    try {
-        const limit = req.query.limit ? parseInt(req.query.limit) : undefined
-        const products = await productManager.getAllProducts(limit)
-        res.render('templates/home', { products })
-    } catch (error) {
-        console.log(error);
-    }
-})
+viewRouter.get('/products' , viewProducts)
 
 //Obtener un producto por ID
-viewRouter.get('/:pid' , async (req, res) => {
-    try {
-        const productId = parseInt(req.params.pid);
-        const product = await productManager.getProductById(productId);
-        if(!product) {
-            return res.status(404).send('Producto no encontrado');
-        }
-        res.render("templates/home", { product })
-    } catch (error) {
-        console.log(error);
-    }
-})
+viewRouter.get('/products/:pid' , viewProducts)
+
+//Obtener el carrito
+viewRouter.get('/:cartId' , viewCart)
 
 //Obtener RealTimeProducts
 viewRouter.get('/', async (req, res) => {

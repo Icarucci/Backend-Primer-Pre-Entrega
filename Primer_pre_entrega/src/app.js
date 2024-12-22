@@ -30,6 +30,7 @@ app.use('/api/cart' , cartsRouter);
 app.use('/home' , viewRouter)
 app.use('/realTimeProducts' , viewRouter);
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/cart', viewRouter);
 
 
 const SERVER_PORT = 8080;

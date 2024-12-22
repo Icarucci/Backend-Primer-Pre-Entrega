@@ -1,0 +1,19 @@
+<div>
+    <h1>Tu Carrito</h1>
+    <h2>Id del carrito: {{cart._id}}</h2>
+    <div>
+        {{#each cart.products}}
+            
+            <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{id_prod.imagen}}" alt="Card image cap">
+            <div class="card-body">
+                <h3>Tipo: {{id_prod.titulo}}</h3>
+                <h3>Cantidad: {{id_prod.stock}}</h3>
+                <h3>Precio: $ {{id_prod.precio}}</h3>
+            </div>
+            </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

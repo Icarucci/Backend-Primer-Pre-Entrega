@@ -1,12 +1,36 @@
 import { productsModel } from "../models/products.model.js";
 
+
 export const getProducts = async (req, res) => {
     try {
         const limit = req.query.limit ? parseInt(req.query.limit) : undefined
-        const prods = await productsModel.find().limit(limit)
-        res.status(200).render("templates/home", {products: prods });
+        const prods = await productsModel.paginate({}, {limit: 1, page:1})
+        res.status(200).send({products: prods });
     } catch (error) {
         res.status(500).send('Error al obtener los productos')
+    }
+}
+
+export const viewProducts = async (req, res) => {
+    try {
+        const limit = req.query.limit ? parseInt(req.query.limit) : undefined
+        const prods = await productsModel.find().limit(limit).lean()
+        res.status(200).render("templates/home", {products: prods });
+    } catch (error) {
+        res.status(500).render("templates/error")
+    }
+}
+
+export const viewProduct = async (req, res) => {
+    try {
+        const productId = parseInt(req.params.pid);
+        const product = await productsModel.findById(productId)
+        if(!product) {
+            return res.status(404).render("templates/error");
+        }
+        return res.status(200).render("templates/home", {product: product });
+    } catch (error) {
+        res.status(500).send('Error al obtener el producto')
     }
 }
 
@@ -17,7 +41,7 @@ export const getProduct = async (req, res) => {
         if(!product) {
             return res.status(404).send('Producto no encontrado');
         }
-        return res.status(200).render("templates/home", {product: product });
+        return res.status(200).send({product: product });
     } catch (error) {
         res.status(500).send('Error al obtener el producto')
     }
